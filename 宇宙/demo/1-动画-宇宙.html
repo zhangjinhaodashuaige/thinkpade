@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            background: url("../images/bg.jpg");
+        }
+        ul{
+            width: 600px;
+            height: 600px;
+            margin:100px auto;
+            position: relative;
+        }
+        ul > li{
+            list-style: none;
+            position: absolute;
+            left:50%;
+            top:50%;
+            transform: translate(-50%,-50%);
+            border-radius: 50%;
+            box-sizing: border-box;
+            /*添加动画*/
+            animation: starAnimation linear infinite;
+        }
+        ul > li >span{
+            width: 12px;
+            height: 12px;
+            border-radius: 6px;
+            background-color: #fff741;
+            position: absolute;
+            left: 50%;
+            top: 0;
+            /*margin-left: -6px;
+            margin-top: -6px;*/
+            animation: starAnimation 2s linear infinite;
+        }
+        ul > li >span > span{
+            width: 6px;
+            height: 6px;
+            border-radius: 3px;
+            background-color: blue;
+            position: absolute;
+            left: 3px;
+            top: -10px;
+        }
+        ul > li:nth-child(1){
+            width: 60px;
+            height: 60px;
+            background-color: #fff741;
+            box-shadow: 0px 0px 50px #fff741;
+        }
+        ul > li:nth-child(2){
+            width: 120px;
+            height: 120px;
+            border: 2px solid #394057;
+            animation-duration: 2s;
+        }
+        ul > li:nth-child(3){
+            width: 180px;
+            height: 180px;
+            border: 2px solid #394057;
+            animation-duration: 4s;
+        }
+        ul > li:nth-child(4){
+            width: 240px;
+            height: 240px;
+            border: 2px solid #394057;
+            animation-duration: 7s;
+            /*添加背景*/
+            background: url("../images/asteroids_meteorids.png") no-repeat;
+            background-size: 240px 240px;
+        }
+        ul > li:nth-child(5){
+            width: 300px;
+            height: 300px;
+            border: 2px solid #394057;
+            animation-duration: 13s;
+        }
+        ul > li:nth-child(6){
+            width: 360px;
+            height: 360px;
+            border: 2px solid #394057;
+            animation-duration: 18s;
+        }
+        ul > li:nth-child(7){
+            width: 420px;
+            height: 420px;
+            border: 2px solid #394057;
+            animation-duration: 28s;
+        }
+        ul > li:nth-child(8){
+            width: 480px;
+            height: 480px;
+            border: 2px solid #394057;
+            animation-duration: 43s;
+        }
+        ul > li:nth-child(9){
+            width: 540px;
+            height: 540px;
+            border: 2px solid #394057;
+            animation-duration: 66s;
+        }
+        ul > li:nth-child(10){
+            width: 600px;
+            height: 600px;
+            border: 2px solid #394057;
+            animation-duration: 88s;
+        }
+
+        @keyframes starAnimation {
+            from{
+                transform: translate(-50%,-50%)  rotate(0deg);
+            }
+            to{
+                transform:translate(-50%,-50%)  rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li></li>
+    <li><span></span></li>
+    <li><span></span></li>
+    <li><span></span></li>
+    <li><span></span></li>
+    <li><span></span></li>
+    <li><span><span></span></span></li>
+    <li><span></span></li>
+    <li><span></span></li>
+    <li><span></span></li>
+</ul>
+</body>
+</html>
