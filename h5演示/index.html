@@ -1,0 +1,312 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>jQuery鼠标移动发出气泡动画 </title>
+
+<link rel="stylesheet" type="text/css" href="css/demo.css">
+<link rel="stylesheet" type="text/css" href="css/style3.css">
+
+<!--demo依赖以下五个js文件-->
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+
+<script src="js/jquery.jgrowl.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/modernizr.custom.79639.js"></script>
+	<!--swatchbook是jquary的一个色票插件-->
+<script type="text/javascript" src="js/jquery.swatchbook.js"></script>
+<script type="text/javascript" src="js/sketch.min.js"></script>
+
+
+<!--小于ie8则该divdisplay：none-->
+<!--[if lte IE 8]><style>.main{display:none;} .support-note .note-ie{display:block;}</style><![endif]-->
+</head>
+<body id="body">
+
+	<!--小泡泡html-->
+	<div id="test" style=" position:fixed;top:0px;z-index:20;"></div>
+
+
+	<div class="container">
+
+		<header>
+			<img src="images/fumikaLogo.png" style="top:100px;">
+
+			<div class="support-note">
+				<!-- let's check browser support with modernizr -->
+				<!--span class="no-cssanimations">CSS animations are not supported in your browser</span-->
+				<span class="no-csstransforms">CSS transforms are not
+					supported in your browser</span>
+				<!--span class="no-csstransforms3d">CSS 3D transforms are not supported in your browser</span-->
+				<span class="no-csstransitions">CSS transitions are not
+					supported in your browser</span> <span class="note-ie">Sorry, only
+					modern browsers.</span>
+			</div>
+
+		</header>
+
+
+        <!--swatchbook的html-->
+		<div id="sb-container" class="sb-container">
+
+			<div>
+				<span class="sb-icon icon-cog"></span>
+				<h4>
+					<span>All Settings</span>
+				</h4>
+			</div>
+			<div>
+				<span class="sb-icon icon-flight"></span>
+				<h4>
+					<span>User Modes</span>
+				</h4>
+			</div>
+			<div>
+				<span class="sb-icon icon-eye"></span>
+				<h4>
+					<span>Browse All</span>
+				</h4>
+			</div>
+			<div>
+				<span class="sb-icon icon-install"></span>
+				<h4>
+					<span>Install App</span>
+				</h4>
+			</div>
+			<div>
+				<span class="sb-icon icon-bag"></span>
+				<h4>
+					<span>Productivity</span>
+				</h4>
+			</div>
+			<div>
+				<span class="sb-icon icon-globe"></span>
+				<h4>
+					<span>All Options</span>
+				</h4>
+			</div>
+			<div>
+				<span class="sb-icon icon-picture"></span>
+				<h4>
+					<span>User Images</span>
+				</h4>
+			</div>
+			<div>
+				<span class="sb-icon icon-video"></span>
+				<h4>
+					<span>User Videos</span>
+				</h4>
+			</div>
+			<div>
+				<span class="sb-icon icon-download"></span>
+				<h4>
+					<span>Download App</span>
+				</h4>
+			</div>
+			<div>
+				<span class="sb-icon icon-mobile"></span>
+				<h4>
+					<span>Mobile Theme</span>
+				</h4>
+			</div>
+			<div onClick="login();">
+				<span class="sb-icon icon-camera"></span>
+				<h4>
+					<span>Login SYstem</span>
+				</h4>
+			</div>
+			<div>
+				<h4>
+					<span>Profile</span>
+				</h4>
+				<span class="sb-toggle">Click to open</span>
+
+			</div>
+
+
+		</div>
+		<!-- sb-container -->
+
+	</div>
+
+	<!--调用swatchbook方法-->
+	<script type="text/javascript">
+		$(function() {
+
+			$('#sb-container').swatchbook({
+
+				angleInc : 15,//每个扇叶的度数
+				neighbor : 15,//点击扇叶是扇叶的度数
+				// if it should be closed by default
+				initclosed :true,//为true开始扇子是合上的，为false开始是打开的，状态机的存在吧
+
+				closeIdx : 11//这个val是扇叶的索引值，从0开始11就是当点击从左到右的第12片扇叶（黑色）时合上扇子
+			});
+
+		});
+	</script>
+<!--气泡js-->
+	<script>
+		// ----------------------------------------
+		// Particle
+		// ----------------------------------------
+		//声明一个函数Particl（颗粒的意思）这个函数可以接受三个参数x，y，radius分别代表x坐标，y坐标，半径
+		function Particle(x, y, radius) {
+			this.init(x, y, radius);
+		}
+   		//万物皆对象在这里Particle函数可以看做是一个对象这个对象的原型中有很多方法
+		Particle.prototype = {
+			//init初始化 可以看你作一个方法
+			init : function(x, y, radius) {
+				//this.alive这种写法可以看作当Partocle这个对象调用init方法的时候这个方法所包含的属性，这个alive属性控制着气泡的活性当值为true的时候可以产生气泡
+				this.alive = true;
+				//对象的这个方法的半径是传进来的参数radius或10
+				this.radius = radius||10
+				this.wander = 0.15;//不知道有什么卵用 按照字面意思来看是控制气泡发散的范围的但是在更改值的时候木有反应
+				this.theta = random(TWO_PI);// sketch[skɛtʃ]素描的意思在这里依赖到了sketch.js这个包TWO_PI可以大概看下下面的代码这个一个复杂的数学公式sketch.js中的一段代码
+				// 	two_pi是一个数学常数的值6.28318530717958647693。这是两倍的比一个圆的周长与其直径。它是有用的结合三角函数sin()和cos()。其实就是2倍的π
+				//下面这段代码就是随机出不同大小的圆的一个数学公式random是这里的一个属性在属性里封装了一个函数这个函数可以接受参数可以将TWO_PI这个属性传进去这里是键值对传进去的其实是属性的值h.random()
+//				i(t, {
+//					TWO_PI: 2 * h.PI,
+//					HALF_PI: h.PI / 2,
+//					QUATER_PI: h.PI / 4,
+//					random: function(t, o) {
+//						return e(t) ? t[~~ (h.random() * t.length)] : (n(o) || (o = t || 1, t = 0), t + h.random() * (o - t))
+//					},
+//					lerp: function(e, t, n) {
+//						return e + n * (t - e)
+//					},
+//					map: function(e, t, n, o, r) {
+//						return (e - t) / (n - t) * (r - o) + o
+//					}
+//				}),
+//						t[g] = !0
+//			}
+//		},
+
+				this.drag = 0.92;//拖拽
+				this.color = '#fff';//初始化出来的都是白色的
+
+				this.x = x || 0.0;
+				this.y = y || 0.0;
+
+				this.vx = 0.0;
+				this.vy = 0.0;
+			},
+			//对象的移动方法
+			move : function() {
+
+				this.x += this.vx;//在这里定义了一个vx，vy应该是气泡的运动轨迹
+				this.y += this.vy;
+
+				this.vx *= this.drag;//为什么又要新定义vx？因为气泡刚开始是在鼠标的位置出现的但是出现后要自己做动画乘等于drag就是一个
+				this.vy *= this.drag;//
+
+				this.theta += random(-0.5, 0.5) * this.wander;//在移动的时候theta 为-0.5到0.5的一个随机数乘以this.wander
+				this.vx += sin(this.theta) * 0.1;//利用正弦余弦让气泡做曲线运动
+				this.vy += cos(this.theta) * 0.1;
+
+				this.radius *= 0.96;//半径每次乘以0.96做衰减
+				this.alive = this.radius > 0.5;//在这里做了一个判断如果半径>0.5状态机为true否则为falsh气泡消失
+			},
+
+			draw : function(ctx) {
+
+				ctx.beginPath();//beginPath() 方法在一个画布中开始子路径的一个新的集合。
+				ctx.arc(this.x, this.y, this.radius, 0, TWO_PI);//arc方法是canvas中的画弧语法arc(x, y, radius, startAngle, endAngle, counterclockwise)x,y是圆心位置 radius是半径 ，后俩是开始位置和结束位置
+				ctx.fillStyle = this.color;//fillStyle是填充色
+				ctx.fill();//fill（）方法是填充的意思在canvas画图需要写这个方法不然只是画线了没有填充
+			}
+		};
+
+		// ----------------------------------------
+		// Example
+		// ----------------------------------------
+
+		var MAX_PARTICLES = 280;//定义一个最大可以出现的小亮点数
+		var COLOURS = [ '#69D2E7', '#A7DBD8', '#E0E4CC', '#F38630', '#FA6900',
+			'#FF4E50', '#F9D423' ];//气泡的颜色存储
+
+		var particles = [];//颗粒
+		var pool = [];//水池
+		//demo=Sketch里的create方法
+		var demo = Sketch.create({
+			container : document.getElementById('test')//container就是容器，这个容器就是test这个id的盒子
+		});
+
+		demo.setup = function() {
+
+			// 粒子初始
+			var  x, y;
+
+			x = (demo.width * 0.5) + random(-100, 100);
+			y = (demo.height * 0.5) + random(-100, 100);
+			demo.spawn(0, 999);
+
+		};
+		//demo大量产生 每产生一个气泡都要执行这段代码哦
+		demo.spawn = function(x, y) {
+
+			if (particles.length >= MAX_PARTICLES)//如果颗粒这个数组超过页面允许最多的气泡数量
+				pool.push(particles.shift());//水池数组push一个颗粒数组移除的第一个值
+
+			particle = pool.length ? pool.pop() : new Particle();//声明一个变量 如果pool.length为真那么删除水池数组的最后一个值，如果为假也就是水池是空的那么可以再new particle小气泡  看下一行
+			// 而且这个变量继承了气泡对象可以使用气泡对象的方法和属性，因为变量是在声明的时候就执行的所以这里用了变量
+			particle.init(x, y, random(5, 40));//可以看出每个气泡的创建都是靠这个变量继承气泡对象的方法在这里使用了继承的init方法
+
+			particle.wander = random(0.5, 2.0);
+			particle.color = random(COLOURS);//气泡颜色=随机这个数组COLOURS中的一个颜色在227行代码
+			particle.drag = random(0.9, 0.99);
+
+			theta = random(TWO_PI);
+			force = random(2, 8);
+
+			particle.vx = sin(theta) * force;
+			particle.vy = cos(theta) * force;
+			//上面的整段代码都在传参，之前的Particle对象的方法和属性都在有形参而在这里传参，
+			particles.push(particle);//在最后将这个对象push进particles数组在下次创建气泡的时候又要从判断气泡数量开始
+		};
+		//更新
+		demo.update = function() {
+
+			var i, particle;
+			//在这里执行的就是不停的更新气泡也就是让气泡在new出来后可以自己动了
+			for (i = particles.length - 1; i >= 0; i--) {
+
+				particle = particles[i];
+
+				if (particle.alive)
+					particle.move();
+				else
+					pool.push(particles.splice(i, 1)[0]);
+			}
+		};
+		//这里执行的是绘画小圆点
+		demo.draw = function() {
+
+			demo.globalCompositeOperation = 'lighter';//globalCompositeOperation是HTML5 canvas的一个属性 属性设置或返回如何将一个源（新的）图像绘制到目标（已有）的图像上。
+			// 源图像 = 您打算放置到画布上的绘图。目标图像 = 您已经放置在画布上的绘图。// lighter是值显示源图像 + 目标图像。
+
+			for ( var i = particles.length - 1; i >= 0; i--) {
+				particles[i].draw(demo);
+			}
+			//遍历递归调用
+		};
+		//这里写了支持手机端touch事件
+		demo.mousemove = function() {
+
+			var particle, theta, force, touch, max, i, j, n;
+
+			for (i = 0, n = demo.touches.length; i < n; i++) {
+
+				touch = demo.touches[i], max = random(1, 4);
+				for (j = 0; j < max; j++) {
+					demo.spawn(touch.x, touch.y);
+				}
+
+			}
+		};
+	</script>
+
+</body>
+</html>
