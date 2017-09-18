@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+        img {
+            vertical-align: top;
+        }
+        .top {
+            width: 1500px;
+            margin: 0 auto;
+        }
+        .main {
+            margin: 0 auto;
+            width: 1000px;
+            margin-top: 10px;
+
+        }
+        #Q-nav {
+            width: 1500px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        .fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+    </style>
+
+    <script>
+        window.onload = function () {
+            //需求：页面滑动的时候每次都要检测一下，背面被卷去的头部，如果大于第一张图片的高，那么第二个图片添加类名。
+            //步骤：
+            //1.老三步。window.onscroll;
+            //2.判断：第一个盒子的高度。
+            //3.如果大于第一个盒子的高。给第二个盒子加类名。
+
+
+            //1.老三步。window.onscroll;
+            var div1 = document.getElementById("top");
+            var div2 = document.getElementById("Q-nav");
+            var div3 = document.getElementById("main");
+            //检测第一个盒子的高。
+            var div1Height = div1.scrollHeight;
+
+            window.onscroll = function () {
+                //2.判断：第一个盒子的高度。
+                if(div1Height < scroll().top){
+                    //3.如果大于第一个盒子的高。给第二个盒子加类名。如果不大于，去掉类名
+                    div2.className = "fixed";
+                    //因为固定定位不占位置，所以原来的位置要给填充上。
+                        //给上盒子一个下margin，或者给下盒子一个上margin；
+                    div3.style.marginTop = div2.scrollHeight + "px";
+                        //给下盒子一个上padding。给上盒子一个下padding。
+                }else{
+                    div2.className = "";
+                    //还原定位后还要去掉margin
+                    div3.style.marginTop = 0;
+                }
+            }
+
+        }
+
+        function scroll(){
+            return {
+                "top": window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop,
+                "left": window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft
+            };
+        }
+    </script>
+</head>
+<body>
+
+    <div class="top" id="top">
+        <img src="images/top.png" alt=""/>
+    </div>
+
+    <div id="Q-nav">
+        <img src="images/nav.png" alt=""/>
+    </div>
+
+    <div class="main" id="main">
+        <img src="images/main.png" alt=""/>
+    </div>
+
+
+
+</body>
+</html>
+
