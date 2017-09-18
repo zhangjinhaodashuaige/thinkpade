@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('li').click(function(){
+                console.log('hello');
+                console.log(this);
+                $(this).css({
+                    background:'orange'
+                });
+                var $body = $(document.body);
+                console.log($body);
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <ul>
+        <li>测试数据</li>
+        <li>测试数据</li>
+        <li>测试数据</li>
+        <li>测试数据</li>
+    </ul>
+</body>
+
+</html>

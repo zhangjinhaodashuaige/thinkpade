@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript">
+        /**
+         * this 是谁
+         * $(function(){})等价于 $(document).ready(function(){})
+         * 相当于将这个匿名函数 绑定给了 document对象 所以这里的this 是 document
+         */
+         $(function(){
+             // document
+             console.log(this);
+
+             $('input').eq(0).click(function(){
+                // jQuery中 事件绑定给了谁 那么 在绑定的匿名函数中 获取到的this 就是那个Dom元素
+                 console.log(this);
+             })
+
+             // 获取第二个按钮
+             var secondBtn = document.getElementById('second-btn');
+         })
+
+        //  测试的绑定的function
+        function doSomething(){
+            console.log(this);
+        }
+    </script>
+</head>
+<body>
+    <input type="button" value='测试按钮'>
+    <!-- 使用这种方式 绑定的事件 浏览器 会 自动帮我们创建一个 function 将代码包裹起来
+         直接在代码中 用 this 就是这个dom元素本身
+     -->
+    <input id='second-btn' type="button" onclick="alert(this);" value='行内绑定事件'>
+    <!-- 
+        浏览器会为我们干这么一件事
+         third-btn.onclick = function(){
+                                console.log(this);
+                                window.doSomething(this);
+                            }
+        我们点击了按钮 相当于 干了如下操作
+        third-btn.onclick();
+     -->
+    <input id='third-btn' type="button" onclick="doSomething()" value='行内绑定事件'>
+</body>
+</html>

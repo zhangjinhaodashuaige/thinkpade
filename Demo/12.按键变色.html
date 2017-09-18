@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        
+        .showBox {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+            background-color: skyblue;
+            line-height: 300px;
+        }
+        
+        .showBox p {
+            font-size: 30px;
+        }
+    </style>
+    <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript">
+        var colorObjs = {
+            "87": "red",
+            "83": "yellow",
+            "65": "blue",
+            "68": "green"
+        };
+
+        $(function () {
+            $(document).keydown(function (event) {
+                console.log(event.keyCode);
+                $('.showBox')
+                    .children('p')
+                    .text('按的键是：' + event.keyCode)
+                    .end()
+                    .css('background-color',colorObjs[event.keyCode]||'#0094ff');
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <h2>按键变色</h2>
+    <div class="showBox">
+        <p></p>
+    </div>
+</body>
+
+</html>

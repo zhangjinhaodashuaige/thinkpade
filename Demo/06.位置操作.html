@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <style>
+        .show-box {
+            width: 100px;
+            height: 100px;
+            background-color: orange;
+            border-radius: 50%;
+            /*position: absolute;*/
+        }
+    </style>
+    <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            // offset()方法取值
+            $('input:eq(0)').click(function(){
+                // 获取 元素 再屏幕上的位置
+                console.log($('.show-box').offset());
+                console.log($('.show-box').position());
+            })
+            // offset()方法赋值
+            $('input:eq(1)').click(function(){
+                // 设置位置 会自动添加上定位
+                // $('.show-box').offset({
+                //     top:100,
+                //     left:200
+                // });
+
+                // 这种方式设置 只是单纯的添加行内样式，并不会 添加定位
+                $('.show-box').css({
+                    top:100,
+                    left:200
+                })
+            })
+            // 只是取值 无法赋值
+            $('input:eq(2)').click(function(){
+                console.log($(".show-box").position());
+                $('.show-box').position({
+                    top:100,
+                    left:100
+                })
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <input type="button" value="获取偏移值_offset">
+    <input type="button" value="设置偏移值">
+    <input type="button" value="获取偏移值_position">
+    <hr>
+    <div class="show-box"></div>
+    <h2>测试标题</h2>
+</body>
+
+</html>

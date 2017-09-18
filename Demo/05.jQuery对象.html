@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var $li = $('li');
+            console.log($li)
+            console.log($li.length);
+            // 获取某个Dom元素
+            var fourLi = $li[3];
+            console.log(fourLi);
+            // 跟使用所用的功能类似，麻烦，还是用上面的方法吧
+            console.log($li.get(3));
+        })
+    </script>
+</head>
+
+<body>
+    <ul>
+       <li>西兰花0</li>
+       <li>西兰花1</li>
+       <li>西兰花2</li>
+       <li>西兰花3</li>
+       <li>西兰花4</li>
+       <li>西兰花5</li>
+    </ul>
+</body>
+
+</html>

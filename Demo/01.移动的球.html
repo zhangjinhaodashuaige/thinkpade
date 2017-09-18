@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: hotpink;
+            position: absolute;
+            box-sizing: border-box;
+        }
+        
+        .ball {
+            background-color: orange;
+        }
+    </style>
+    <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+
+            $('input')
+            .click(function () {
+                autoMove();
+            })
+
+            $('.ball')
+            .mouseenter(function () {
+                $(this).css({
+                    border: '10px solid yellowgreen'
+                })
+            })
+            .mouseleave(function () {
+                $(this).css({
+                    border: 'none'
+                });
+            })
+        })
+
+        function autoMove() {
+            var randomX = Math.random() * $(window).width();
+            var randomY = Math.random() * $(window).height();
+            // $('.ball').first().animate({
+            $('.ball').first().animate({
+                left: randomX,
+                top: randomY
+            }, 1000, function () {
+                // 保留了 原本的动画队列
+                /**
+                 * 使用false来实现克隆 还保留原本的动画队列
+                 * 事件绑定效果已经无效了
+                 */
+                var $cloneBall = $(this).clone(false);
+                // 动画队列不存在，事件还在
+                /**
+                 * 使用true的方式克隆元素 动画队列没有了
+                 * 但是事件绑定效果依旧保留
+                 */
+                // var $cloneBall = $(this).clone(true);
+
+                // 问题主要是出现在 我们每次在开启动画时 是命中了所有的球，而我们只需要移动第一颗球即可
+                // 修改autoMove中为球添加动画的选择器即可
+
+                $cloneBall.appendTo('body');
+                autoMove();
+            })
+
+        }
+    </script>
+</head>
+ 
+<body>
+    <input type="button" value='移动'>
+    <div class="ball"></div>
+</body>
+
+</html>

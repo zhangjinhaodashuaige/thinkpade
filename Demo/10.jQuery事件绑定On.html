@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <style>
+        ul {
+            width: 200px;
+            list-style: none;
+            padding: 0;
+            border: 1px solid #000;
+        }
+        
+        li {
+            background-color: red;
+        }
+    </style>
+    <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('li').first().css({
+                background: 'orange'
+            });
+            // 为页面上的li绑定事件
+            $('li').click(function () {
+                console.log('click的方式绑定的');
+            })
+            $('li').on('click',function () {
+                console.log('on的方式绑定的');
+            })
+            // on方法 通过传递参数的不同 实现不同的效果
+            $('ul').on('click','li',function(){
+                console.log('绑定给ul 通过子元素li触发');
+            })
+
+            $('input').first().click(function () {
+                $('<li>创建的li标签</li>').appendTo('ul');
+            })
+            $('input').eq(1).click(function(){
+                // 解除 所有绑定的事件
+                $('ul').off();
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <input type="button" value='添加li标签'>
+    <input type="button" value='解绑事件'>
+    <ul>
+        <li>默认的li</li>
+    </ul>
+</body>
+
+</html>
