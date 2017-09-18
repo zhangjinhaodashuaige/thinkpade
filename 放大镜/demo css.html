@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {margin: 0;padding: 0;}
+        .box {
+            width: 350px;
+            height: 350px;
+            margin:100px;
+            border: 1px solid #ccc;
+            position: relative;
+        }
+        .big {
+            width: 400px;
+            height: 400px;
+            position: absolute;
+            top: 0;
+            left: 360px;
+            border: 1px solid #ccc;
+            overflow: hidden;
+            display: none;
+        }
+        .mask {
+            width: 175px;
+            height: 175px;
+            background: rgba(255, 255, 0, 0.4);
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: move;
+            display: none;
+        }
+        .small {
+            position: relative;
+        }
+        img {
+            vertical-align: middle;
+        }
+    </style>
+    <script src="animate.js"></script>
+    <script>
+        window.onload = function () {
+            //需求1：鼠标进入显示盒子。移开隐藏。
+            var box = document.getElementById("box");
+            var small = box.children[0];
+            var mask = small.children[1];
+            var big = box.children[1];
+            var img = big.children[0];
+
+            //onmouseenter == onmouseover   (他们两个不冒泡)
+            //onmouseleave == onmouseout    (他们两个不冒泡)
+            small.onmouseenter = function () {
+                show(mask);
+                show(big);
+            }
+            small.onmouseleave = function () {
+                hide(mask);
+                hide(big);
+            }
+
+            //需求2：当鼠标在box盒子中移动的时候，黄盒子跟随移动。大盒子中的图片等比例移动。
+            //步骤：
+            //1.获取鼠标在盒子中的坐标。(以box为基准获取鼠标在盒子中的坐标)
+            box.onmousemove  = function (event) {
+                //新五步
+                event = event || window.event;
+                var pagey = event.pageY || event.clientY + scroll().top;
+                var pagex = event.pageX || event.clientX + scroll().left;
+
+                var boxy = box.offsetTop;
+                var boxx = box.offsetLeft;
+
+                //获取坐标值(如果想让鼠标在黄盒子最中间，必须减去宽高的一半)
+                var y = pagey - boxy - mask.offsetHeight/2;
+                var x = pagex - boxx - mask.offsetWidth/2;
+
+                //约束黄盒子的坐标值。让他的最小值不能小于0；
+                //约束黄盒子的坐标值。让他的最大值不能大于box-mask。
+                if(y<0){
+                    y = 0;
+                }
+                if(y>box.offsetHeight-mask.offsetHeight){
+                    y = box.offsetHeight-mask.offsetHeight;
+                }
+                if(x<0){
+                    x = 0;
+                }
+                if(x>box.offsetWidth-mask.offsetWidth){
+                    x = box.offsetWidth-mask.offsetWidth;
+                }
+
+                //2.让黄盒子和鼠标联动。
+                mask.style.top = y + "px";
+                mask.style.left = x + "px";
+
+
+                //3.让大盒子中的图片和我的鼠标等比例移动。
+                //算法1：大图片的宽/小图片的宽 = 大图片走的距离/mask盒子走的距离
+
+                //获取等比例图片的x坐标和y坐标
+//                var imgy = img.offsetHeight/box.offsetHeight*y;
+//                var imgx = img.offsetWidth/box.offsetWidth*x;
+
+
+                //算法2：大图片走过的距离（大图片-大盒子）/mask走过的距离（box-mask）
+                        //= 大图片走过的距离（真实距离）/黄河子走过的距离（真实距离）
+                var imgy = (img.offsetHeight-big.offsetHeight)/(box.offsetHeight-mask.offsetHeight)*y;
+                var imgx = (img.offsetWidth-big.offsetWidth)/(box.offsetWidth-mask.offsetWidth)*x;
+
+
+                //以为img没有定位，所以我们用marginTop和marginLeft来移动图片，而且是负值。
+                img.style.marginTop = -imgy+"px";
+                img.style.marginLeft = -imgx+"px";
+            }
+
+
+
+        }
+    </script>
+
+</head>
+<body>
+
+    <div class="box" id="box">
+        <!--左侧盒子-->
+        <div class="small">
+            <img src="images/001.jpg" alt=""/>
+            <div class="mask"></div>
+        </div>
+        <!--右侧盒子-->
+        <div class="big">
+            <img src="images/0001.jpg" alt=""/>
+        </div>
+
+    </div>
+
+
+</body>
+</html>
