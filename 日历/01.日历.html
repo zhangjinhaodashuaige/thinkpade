@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <title>title</title>
+  <style>
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 100px auto;
+      /*border: 1px solid gray;*/
+      /* 一行7个 */
+      width: 490px;
+      overflow: hidden;
+    }
+    
+    li {
+      float: left;
+      width: 68px;
+      height: 68px;
+      text-align: center;
+      line-height: 70px;
+      /*border: 1px solid gray;*/
+      border-top:1px solid gray;
+      border-left:1px solid gray;
+    }
+  </style>
+  <script type="text/javascript" src="../01.knowledges/js/jquery-1.12.4.min.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      // 单数 变为 天蓝色
+      $('ul>li:odd').css('background', 'skyblue');
+
+      // 双数 变为 橘红
+      $('ul>li:even').css('background', 'orange');
+      // 第一个 li标签 变为粉色
+      $('ul>li:first-child').css('background', 'hotpink');
+
+      // 最后一个li标签 变为 绿色
+      $('ul>li:last-child').css({
+        'background':'green',
+        'border-right':'1px solid gray'
+
+      });
+
+      // 7 14 21 28 7n
+      // n从 0开始 
+      // n=0 7n = 0
+
+      // 6 13 20 27  7n-1
+      $('ul>li:nth-child(7n)').css({
+        'background-color':'lightgray',
+        'border-right':'1px solid gray'
+      });
+      $('ul>li:nth-child(7n-1)').css('background-color','red');
+
+      //  25之后 缺少了 底部边框
+      // 因为 添加给 25之后 吧 22-23 顶下来了一像素
+      $('ul>li:nth-child(n+22)').css('border-bottom','1px solid gray');
+
+      // 从 29开始 去掉 上边框
+      $('ul>li:nth-child(n+29)').css('border-top','none');
+    })
+  </script>
+</head>
+
+<body>
+  <ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+    <li>7</li>
+    <li>8</li>
+    <li>9</li>
+    <li>10</li>
+    <li>11</li>
+    <li>12</li>
+    <li>13</li>
+    <li>14</li>
+    <li>15</li>
+    <li>16</li>
+    <li>17</li>
+    <li>18</li>
+    <li>19</li>
+    <li>20</li>
+    <li>21</li>
+    <li>22</li>
+    <li>23</li>
+    <li>24</li>
+    <li>25</li>
+    <li>26</li>
+    <li>27</li>
+    <li>28</li>
+    <li>29</li>
+    <li>30</li>
+    <li>31</li>
+  </ul>
+  
+</body>
+
+</html>
