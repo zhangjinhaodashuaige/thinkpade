@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {margin:0; padding: 0}
+        ul {list-style: none;}
+        body {
+            background-color: #333;
+        }
+        .nav {
+            width: 800px;
+            height: 42px;
+            margin: 100px auto;
+            background: url(images/rss.png) right center no-repeat #fff;
+            border-radius: 10px;
+            position: relative;
+        }
+        .nav ul li{
+            width: 83px;
+            height: 42px;
+            float: left;
+            line-height: 42px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .nav span {
+            width: 83px;
+            height: 42px;
+            background: url(images/cloud.gif) no-repeat;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .nav  ul {
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div class="nav">
+    <span id="cloud"></span>
+    <ul>
+        <li>首页新闻</li>
+        <li>师资力量</li>
+        <li>活动策划</li>
+        <li>企业文化</li>
+        <li>招聘信息</li>
+        <li>公司简介</li>
+        <li>上海校区</li>
+        <li>广州校区</li>
+    </ul>
+</div>
+</body>
+</html>
+<script>
+    var cloud = document.getElementById("cloud");   // 云彩有了
+    var lis = document.getElementsByTagName("li");
+    //  我们需要一个变量，用来存储 我们 点击的 对象 位置
+    var current = 0;  // 存储点击之后当前位置
+    for(var i=0;i<lis.length;i++) {
+        lis[i].onmouseover = function() {   // 鼠标经过
+            // 当我们鼠标放到某个li 上的时候，只需要 让 云彩的left 值 是  当前li 的offsetLeft
+            // cloud.style.left = this.offsetLeft + "px";
+            animate(cloud,this.offsetLeft);  // 第一个参数  谁动    第二个参数 动多少
+        }
+        lis[i].onmouseout = function() {  //  鼠标离开
+            animate(cloud,current);  // 鼠标离开就回到 上次单击的位置
+        }
+        lis[i].onclick = function() {
+            current = this.offsetLeft;  // 记录当前点击的位置
+            animate(cloud,current);  // 点击之后，就应该滑动到当前的位置
+            console.log(current)
+        }
+    }
+    function animate(obj,target) {  // 就是让谁做动画
+        clearInterval(obj.timer);
+        obj.timer = setInterval(function() {
+            // 运动公式  leader = leader + (target - leadaer) / 10
+            var step = (target - obj.offsetLeft) / 10;
+            step = step > 0 ? Math.ceil(step) : Math.floor(step);
+            obj.style.left = obj.offsetLeft + step + "px";
+            if(target == obj.offsetLeft) {
+                clearInterval(obj.timer);
+            }
+        },10)
+    }
+</script>
