@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        body {
+            background: #000;
+        }
+
+        .wrap {
+            margin: 100px auto 0;
+            width: 630px;
+			height: 394px;
+            padding: 10px 0 0 10px;
+            background: #000;
+            overflow: hidden;
+            border: 1px solid #fff;
+        }
+
+        .wrap li {
+            float: left;
+            margin: 0 10px 10px 0;
+
+        }
+
+        .wrap img {
+            display: block;
+			border: 0;
+        }
+    </style>
+    <script src="jquery-1.11.1.js"></script>
+    <script>
+        //入口函数
+        jQuery(document).ready(function () {
+            //需求1：鼠标放到li上面，让自己透明度变为1，其他的所有兄弟元素，透明度变为0.5
+            //获取所有的li，然后绑定鼠标进入事件
+            $(".wrap").find("li").mouseenter(function () {
+                //让自己透明度变为1，其他的所有兄弟元素，透明度变为0.5
+//                $(this).css("opacity",1);
+//                $(this).siblings("li").css("opacity",0.5);
+                //连式编程（简化版）
+                $(this).css("opacity",1).siblings("li").css("opacity",0.5);
+            });
+
+            //需求2：鼠标移开类名叫做wrap的盒子，所有的盒子的透明度都变为1；
+            $(".wrap").mouseleave(function () {
+                $(this).find("li").css("opacity",1);
+            });
+        })
+    </script>
+</head>
+<body>
+<div class="wrap">
+    <ul>
+        <li><a href="#"><img src="images/01.jpg" alt=""/></a></li>
+        <li><a href="#"><img src="images/02.jpg" alt=""/></a></li>
+        <li><a href="#"><img src="images/03.jpg" alt=""/></a></li>
+        <li><a href="#"><img src="images/04.jpg" alt=""/></a></li>
+        <li><a href="#"><img src="images/05.jpg" alt=""/></a></li>
+        <li><a href="#"><img src="images/06.jpg" alt=""/></a></li>
+    </ul>
+</div>
+</body>
+</html>
