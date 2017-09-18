@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>360-产品介绍</title>
+    <link rel="stylesheet" href="css/360-index.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.fullPage.min.js"></script>
+</head>
+<body>
+<div id="360page">
+    <div class="section first">
+        <div class="logo"></div>
+        <div class="text">
+            <img src="images/text_1.png" alt="">
+            <img src="images/text_2.png" alt="">
+            <img src="images/text_3.png" alt="">
+            <img src="images/text_4.png" alt="">
+            <img src="images/text_5.png" alt="">
+            <img src="images/text_6.png" alt="">
+            <img src="images/text_7.png" alt="">
+            <img src="images/text_8.png" alt="">
+        </div>
+        <div class="info"></div>
+    </div>
+    <div class="section second">
+        <div class="shield">
+            <img src="images/shield_1.png" alt="">
+            <img src="images/shield_2.png" alt="">
+            <img src="images/shield_3.png" alt="">
+            <img src="images/shield_4.png" alt="">
+            <img src="images/shield_5.png" alt="">
+            <img src="images/shield_6.png" alt="">
+            <img src="images/shield_7.png" alt="">
+            <img src="images/shield_8.png" alt="">
+            <img src="images/shield_9.png" alt="">
+        </div>
+        <div class="info"></div>
+    </div>
+    <div class="section third">
+        <div class="info"></div>
+        <div class="fast">
+            <div class="rocket"></div>
+        </div>
+    </div>
+    <div class="section fourth">
+        <div class="search">
+            <div class="searchBar"></div>
+            <div class="searchText"></div>
+            <div class="searchResult"></div>
+        </div>
+        <div class="info"></div>
+    </div>
+    <div class="section fifth">
+        <!-- 其它信息 -->
+        <div class="info"></div>
+        <!-- 浏览器 -->
+        <div class="broswer">
+            <div class="tool"></div>
+            <!-- 边框线 -->
+            <div class="lines lineleft"></div>
+            <div class="lines lineright"></div>
+            <div class="lines linetop"></div>
+            <div class="lines linebottom"></div>
+            <!-- 工具栏 -->
+            <div class="toolbar">
+                <p></p>
+            </div>
+            <!-- 特别line -->
+            <div class="lineextra"></div>
+            <!-- 其它 -->
+            <div class="extra"></div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function(){
+        $('#360page').fullpage({
+            /*设置每一屏的背景色*/
+            sectionsColor:['#0da5d6', '#2AB561', '#DE8910', '#16BA9D', '#0DA5D6'],
+
+            afterLoad:function(anchorLink,index){
+                /*类名：1.不重名  2.可读*/
+                $(".section").removeClass("current");
+                /*添加延迟效果*/
+                setTimeout(function(){
+                    /*为当前屏添加动画或者过渡效果的标记*/
+                    $(".section").eq(index-1).addClass("current");},200);
+            }
+        });
+    });
+    /*$(function(){
+        $('#360page').fullpage({
+            sectionsColor:['#0da5d6', '#2AB561', '#DE8910', '#16BA9D', '#0DA5D6'],
+            /!*滚到某一屏之后的回调  index 是序号，从1开始计算*!/
+            afterLoad:function(anchorLink,index ){
+                /!*将所有的section的动画执行标记清除*!/
+                $(".section").removeClass("current");
+                setTimeout(function(){
+                    /!*为当前section添加动画执行的标记*!/
+                    $(".section").eq(index-1).addClass("current");
+                },200);
+            }
+        });
+    });*/
+</script>
+</body>
+</html>
