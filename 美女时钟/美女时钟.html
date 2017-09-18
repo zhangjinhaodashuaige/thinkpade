@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<img src="" alt=""/>
+
+<script>
+
+
+    //需求：每一分(秒)钟，图片更换一张。对应时间的图片。
+        //思路：利用定时器，获取当前时间（时分秒）。然后组合成一个字符串设置给img的src属性。
+
+    //步骤；
+    //1.设置定时器。
+    //2.获取（时分秒）,组合字符串。
+    //3.赋值src属性。
+
+    var img = document.getElementsByTagName("img")[0];
+    //1.设置定时器。
+    fn();
+    setInterval(fn,1000);
+
+    function fn() {
+        //2.获取（时分秒）,组合字符串。
+        //技术点：获取时分秒，用的是日期对象。
+        var date = new Date();//没执行一次函数，获取一次当前时间。
+        var hour = date.getHours();//24小时进制。而且小于10，没有0；
+        var minute = date.getMinutes();//60进制。而且小于10，没有0；
+        var second = date.getSeconds();//60进制。而且小于10，没有0；
+        //为时分秒，进行处理。<10,添加0；
+        hour = hour<10?"0"+hour:hour;
+        minute = minute<10?"0"+minute:minute;
+        second = second<10?"0"+second:second;
+
+        //3.赋值src属性。
+//        img.src = "meimei/"+hour+"_"+minute+".jpg";
+        img.src = "meimei/"+hour+"_"+second+".jpg";
+    }
+
+
+
+</script>
+
+
+</body>
+</html>
