@@ -1,0 +1,302 @@
+
+#main{max-width: 640px;height:100%;padding: 0px;margin: 0 auto;position: relative;top:0px;overflow: hidden}
+
+html,body{
+  width:100%;
+  height:100%;
+}
+
+.boxMax,.vcont,.boxCont{
+  position: absolute;
+  top:0;
+  left:0;
+  z-index: 100000;
+  display:none;
+}
+.video-box {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: none no-repeat center; 
+}
+.video-box video {
+    position: absolute;
+}
+
+#boxv{
+  position: absolute;
+  top:0;
+  left:0;
+  display: none;
+  z-index: 10000;
+  background: #fff;
+}
+
+.page1{
+  height:100%;
+  background: url('page1bg.jpg')/*tpa=http://go.163.com/2016/0727/yili/images/page1/page1bg.jpg*/;
+  background-size:100% 100%;
+  display:none;
+  z-index:10;
+}
+.page2{position: absolute;top:0;left:0;display:none;}
+ .music{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 50px;
+    height: 50px;
+    z-index: 999999999;
+    background: url("music.png")/*tpa=http://go.163.com/2016/0727/yili/images/music.png*/ no-repeat ;
+        }
+.music.play{
+  -webkit-animation: rotate 3s infinite linear;animation: rotate 3s infinite linear;
+}
+
+.shareImg{z-index:9999999999 }
+#pop{position: absolute;top:0;left: 0;z-index: 9999999999;width: 100%;display: none;}
+
+.box3d{
+  width: 640px;
+  height: 1030px;
+}
+
+.st{
+  position: absolute;
+  width: 214px;
+  margin-left: 50%;
+  left:-107px;
+  top:-30px;
+}
+
+.b360{
+  position: absolute;
+  width:195px;
+  margin-left:50%;
+  left:-97px;
+  top:850px;
+  z-index:1000000;
+}
+.downBtn ,.start{
+  position: absolute;
+  top:913px;
+  z-index:1000000;
+}
+
+.vcont{
+  display:none;
+}
+.cont{
+  width: 640px;
+  position: absolute;
+  top:0;
+  left:0;
+  z-index: 10;
+}
+
+.logo{
+  position: absolute;
+  left:22px;
+  top:42px;
+}
+
+.ssr{
+  position: absolute;
+  width: 221px;
+  margin-left:50%;
+  left:-110px;
+  top:300px;
+}
+.NumPeo{
+  position: absolute;
+  width: 560px;
+  left:20px;
+  top:357px;
+  text-align: center;
+  font-size: 3rem;
+  color:#fff;
+}
+
+.NumPeo ul li{
+  width:70px;
+  float:left;
+}
+.zs{
+  position: absolute;
+  top:820px;
+  width:420px;
+  left:110px;
+  /*-webkit-animation: flash2 3s infinite linear;animation: flash2 3s infinite linear;*/
+}
+.zsbg{
+  position: absolute;
+  top: 805px;
+  width: 450px;
+  left: 99px; 
+  -webkit-animation: flash 2s infinite linear;animation: flash 2s infinite linear;
+}
+.page3pop{
+  position: absolute;
+  width: 562px;
+  height: 315px;
+  background: url(pop1.png)/*tpa=http://go.163.com/2016/0727/yili/images/page3/pop1.png*/;
+  margin-left: 50%;
+  left:-281px;
+  top:294px;
+  z-index: 10000000;
+}
+.boxCont{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display:none;
+  z-index: 1000;
+}
+.boxCont:before{
+  content:'';
+  width: 100%;
+  height:100%;
+  overflow: hidden;
+  position: absolute;
+  top:0;
+  left:0;
+  bottom:0;
+  background: #000;
+  opacity:0.7;
+  z-index: -1;
+}
+.names{
+  position: absolute;
+  top: 65px;
+  width: 320px;
+  height: 40px;
+  margin-left: 50%;
+  left: -160px;
+  background-color:transparent;   
+  border:0px;
+  color:#fff;
+  text-align:center;
+  font-size:2rem;
+  z-index:10000000;
+}
+.ts{
+  position: absolute;
+  margin-left: 50%;
+  top:65px;
+  left:-116px;
+}
+.page3sub{
+  position: absolute;
+  width: 306px;
+  margin-left: 50%;
+  left:-163px;
+  top:179px;
+  z-index:10000000;
+}
+.names::-moz-placeholder { color: #fff; }
+.names::-webkit-input-placeholder { color:#fff; }
+.names:-ms-input-placeholder { color:#fff; }
+
+.left,.right{
+  position: absolute;
+  z-index: 100;
+  top:50%;
+}
+.left{
+  left:10px;
+  top:500px;
+}
+.right{
+  right:10px;
+  top:500px;
+}
+
+.share{
+  position: absolute;
+  right:10px;
+  top:5px;
+}
+.kd{
+  position: absolute;
+  width: 369px;
+  margin-left:50%;
+  left:-184px;
+  top:567px;
+}
+.NumEnd{
+  position: absolute;
+  top:671px;
+  left:165px;
+
+}
+.NumEnd ul li{
+  width:38px;
+  float:left;
+  
+}
+.endName{
+  width:320px;
+  position: relative;
+  text-align: center;
+  color:#fff;
+  font-size:2rem;
+  top:7px;
+}
+
+.page4,.page3{
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+.page3Cont,.page4Cont {
+  width: 640px;
+  position: absolute;
+  top:0;
+  left:0;
+  display:none;
+}
+.p3top{
+  position: absolute;
+  top:0;
+  left:0;
+  z-index: 100;
+}
+.bf{
+  position: absolute;
+  margin:535px 0 0 50%;
+  top:-56px;
+  left:-56px;
+}
+
+.page4bg{
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+}
+.page4{
+  position: absolute;
+  width: 535px;
+  height: 838px;
+  top:62px;
+  left:42px;
+}
+
+.swiper-button-disabled{
+  display:none;
+}
+
+.back{
+  position: absolute;
+  top:80%;
+  margin-left: 50%;
+  left:-147px;
+  z-index: 1000000;
+}
+.swiper-slide {
+  -webkit-background-size: cover !important;
+  background-size: cover !important;
+}
