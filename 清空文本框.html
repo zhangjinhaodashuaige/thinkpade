@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>清空文本框</title>
+</head>
+<body>
+<input type="text" id="txt" value="请输入文字 "/>
+</body>
+</html>
+<script>
+  // 要求. 鼠标移入文本框的时候，要清空文本框
+  // 1. 先获得要操作的对象
+  var txt = document.getElementById("txt");
+  // 2. 给事件源注册事件
+  txt.onfocus = function () {
+    if (this.value == "请输入文字 ") {
+      this.value = "";
+    } else {
+      this.value = this.value;
+    }
+  }
+  // 失去焦点的时候，要还原原来的值
+  txt.onblur = function () {
+    if (this.value == "") {
+      this.value = "请输入文字 ";
+    } else {
+      this.value = this.value;
+    }
+  }
+  //  focus  是获得焦点的事件
+  //  blur   是失去焦点的事件
+</script>

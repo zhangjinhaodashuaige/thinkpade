@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*添加监听网络连通事件*/
+    window.addEventListener("online",function(){
+        /*实现数据的初始化，获取初始数据，验证用户信息*/
+        console.log("网络连通了");
+    });
+    /*添加监听网络断开事件*/
+    window.addEventListener("offline",function(){
+        /*清除浏览记录，清除缓存...*/
+        console.log("网络断开了");
+    });
+</script>
+</body>
+</html>

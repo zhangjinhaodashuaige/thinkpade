@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            position: relative;
+            left: 0;
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+    <button>移动</button>
+    <div></div>
+
+    <script>
+        //点击按钮，匀速移动盒子。
+            //思路：就是在left值上面每次多增加一定的距离。
+
+        //步骤：
+        //1.老三步。
+        //2.设置定时器。
+        //3.每次都为style.left属性赋值，每次都多给10px；
+
+
+        //1.老三步。
+        var btn = document.getElementsByTagName("button")[0];
+        var div = document.getElementsByTagName("div")[0];
+
+        //计数器
+        var num = 0;
+
+        btn.onclick = function () {
+            //2.设置定时器。
+            setInterval(function () {
+                //3.每次都为style.left属性赋值，每次都多给10px；
+                num += 10;
+                div.style.left = num + "px";
+            },30);
+        }
+
+        //思考1：如何停下来....
+        //思考2：如何指定位置....
+    </script>
+
+</body>
+</html>

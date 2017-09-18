@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .clock{
+            width: 300px;
+            height: 300px;
+            border: 10px solid #ccc;
+            border-radius: 50%;
+            margin:100px auto;
+            position: relative;
+        }
+        .line{
+            width: 8px;
+            height: 310px;
+            background-color: #ccc;
+            position: absolute;
+            left: 50%;
+            top:-5px;
+            transform: translate(-50%,0);
+        }
+        .line1,.line4{
+            width: 10px;
+        }
+        .line2{
+            transform: translate(-50%,0) rotateZ(30deg);
+        }
+        .line3{
+            transform: translate(-50%,0) rotateZ(60deg);
+        }
+        .line4{
+            transform: translate(-50%,0) rotateZ(90deg);
+        }
+        .line5{
+            transform: translate(-50%,0) rotateZ(120deg);
+        }
+        .line6{
+            transform: translate(-50%,0) rotateZ(150deg);
+        }
+        .cover{
+            width: 270px;
+            height: 270px;
+            border-radius: 50%;
+            background-color: #fff;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+        }
+        .hour,.minute,.second{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-100%);
+            /*设置旋转轴心*/
+            transform-origin: center bottom;
+        }
+        .hour{
+            width: 6px;
+            height: 85px;
+            background-color: red;
+            animation: clockAnimation 43200s linear infinite;
+        }
+        .minute{
+            width: 4px;
+            height: 95px;
+            background-color: blue;
+            animation: clockAnimation 3600s linear infinite;
+        }
+        .second{
+            width: 2px;
+            height: 105px;
+            background-color: hotpink;
+            /*添加动画*/
+            animation: clockAnimation 60s steps(60) infinite;
+            /*animation-play-state: running;*/
+        }
+        .center{
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #ccc;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+        }
+
+        /*创建动画*/
+        @keyframes clockAnimation {
+            from{
+                transform: translate(-50%,-100%) rotateZ(0deg);
+            }
+            to{
+                transform: translate(-50%,-100%) rotateZ(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="clock">
+    <div class="line line1"></div>
+    <div class="line line2"></div>
+    <div class="line line3"></div>
+    <div class="line line4"></div>
+    <div class="line line5"></div>
+    <div class="line line6"></div>
+    <div class="cover"></div>
+    <div class="hour"></div>
+    <div class="minute"></div>
+    <div class="second"></div>
+    <div class="center"></div>
+</div>
+</body>
+</html>

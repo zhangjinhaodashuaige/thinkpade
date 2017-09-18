@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        img {
+            display: block;
+        }
+        
+        .wrapper {
+            width: 490px;
+            height: 170px;
+            margin: 100px auto;
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
+        
+        .slider {
+            width: 490px;
+            height: 170px;
+            background-color: pink;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .slider ul {
+            width: 1000%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        .slider li {
+            float: left;
+        }
+        
+        .slider-nav {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+        }
+        
+        .slider-nav span {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background-color: #fff;
+            text-align: center;
+            line-height: 16px;
+            cursor: pointer;
+        }
+        
+        .slider-nav span.current {
+            background-color: hotpink;
+            color: #fff;
+        }
+    </style>
+    <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            // span标签的 高亮效果
+            $('.slider-nav').children('span').mouseenter(function () {
+                // 为其添加 current
+                $(this).addClass('current').siblings('span').removeClass('current');
+                // 修改 轮播图 slider-man的 left
+                // 第一个span  0*宽度
+                // 第二个span  1*宽度
+                console.log($(this).index());
+                var index = $(this).index()
+
+                // 获取 宽度
+                console.log($('.slider-main >li').width());
+                var width = $('.slider-main >li').width();
+
+                // 修改 slider-main 的left
+                // $('.slider-main').css('left',index*-width);
+                $('.slider-main').stop().animate({
+                    left:index*-width
+                },500);
+
+            }).mouseleave(function () {
+                // 删除 current
+                // $(this).removeClass('current');
+                // 让鼠标停留的那个 span 还留有 current的 class
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <div class="wrapper" id="wrapper">
+        <div class="slider">
+            <ul class="slider-main">
+                <li>
+                    <a href="#"><img src="img/01.jpg" alt="" /></a>
+                </li>
+                <li>
+                    <a href="#"><img src="img/02.jpg" alt="" /></a>
+                </li>
+                <li>
+                    <a href="#"><img src="img/03.jpg" alt="" /></a>
+                </li>
+                <li>
+                    <a href="#"><img src="img/04.jpg" alt="" /></a>
+                </li>
+                <li>
+                    <a href="#"><img src="img/05.jpg" alt="" /></a>
+                </li>
+            </ul>
+            <div class="slider-nav">
+                <span class="current">1</span>
+                <span>2</span>
+                <span>3</span>
+                <span>4</span>
+                <span>5</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

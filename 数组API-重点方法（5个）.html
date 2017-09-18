@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+
+    //1.concat();链接两个数组。
+    var arr1 = [1,2,3];
+    var arr2 = ["abc","b","c"];
+    var arr3 = arr1.concat(arr2);
+
+//    console.log(arr1);
+//    console.log(arr2);
+    console.log(arr3);
+
+
+
+    //2.slice();   截取；(根据索引值截取)    [包左不包右)
+        //不修改原数组
+//    console.log(arr3.slice(1,4));  // [包左不包右)
+//    console.log(arr3.slice(2));    // 从索引值为2截取到最后
+//    console.log(arr3.slice(-2));   // 从后往前取几个
+//    console.log(arr3.slice(4,2));  // []
+
+
+
+
+
+
+    //3.splice();    删除或替换当前数组的某些项目
+        //原数组也别修改
+
+//    var aaa = arr3.splice(1,3);
+//    console.log(aaa);
+//    console.log(arr3);
+
+
+//    var aaa = arr3.splice(0);  //个数为：arr3.length
+//    console.log(aaa);
+//    console.log(arr3);
+
+
+    //替换；   在后面添加第三，第四，第五个.....参数。  不能用数组
+
+//    var aaa = arr3.splice(3,3,"aaa","bbb","ccc");
+//    console.log(aaa);
+//    console.log(arr3);
+
+    //如果用数组替换会出现二维数组。
+//    var arr4 = ["aaa","bbb","ccc"];
+//    var aaa = arr3.splice(3,3,arr4);
+//    console.log(aaa);
+//    console.log(arr3);
+
+
+    //特殊用法： 删除指定索引值元素。
+
+//    var aaa = arr3.splice(3,1);
+//    console.log(aaa);
+//    console.log(arr3);
+
+
+
+
+    //5.indexOf();lastIndexOf();  从前往后或者从后往前查找元素对应的索引值。
+
+//    console.log(arr3.indexOf("a"));
+//    console.log(arr3.lastIndexOf("a"));
+//    console.log(arr3.lastIndexOf("ac"));
+
+
+
+
+</script>
+
+
+
+</body>
+</html>

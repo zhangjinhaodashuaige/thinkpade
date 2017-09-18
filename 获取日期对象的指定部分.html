@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>获取日期的指定部分信息</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+  // 年  月  日   时   分   秒   毫秒
+  /**
+   * getTime()  返回毫秒数和valueOf()结果一样
+   getMilliseconds()
+   getSeconds()  返回0-59
+   getMinutes()  返回0-59
+   getHours()   返回0-23
+   getDay()     返回星期几 0周日   6周6
+   getDate()    返回当前月的第几天,当月的几号
+   getMonth()   返回月份，从0开始
+   getFullYear()   返回4位的年份  如 2016
+
+   */
+
+  var date = new Date();
+  console.log(date.getTime()); // 和valueOf的效果是一样的，用来获取13位的毫秒数字
+  console.log(date.getMilliseconds());
+  console.log(date.getSeconds());
+  console.log(date.getMinutes());
+  console.log(date.getHours());
+  console.log(date.getDay());  // 星期几   周   礼拜几
+  console.log(date.getDate()); //  当前月份的第几天  几号
+  console.log(date.getMonth()); //显示的是1,因为这里也是从0开始
+  console.log(date.getFullYear());
+
+
+  function getDate(date){
+    var year = date.getFullYear();
+    var month = date.getMonth();
+
+    //2017-02-23 11:05:56     +
+  }
+</script>

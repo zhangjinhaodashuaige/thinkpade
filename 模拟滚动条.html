@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        body {
+            height: 5000px;
+        }
+        .box {
+            width: 300px;
+            height: 450px;
+            margin: 100px auto;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid red;
+        }
+        .content {
+            padding: 10px;
+            line-height: 24px;
+            position: absolute;
+            background-color: #b1ff66;
+        }
+        .scroll {
+            width: 24px;
+            height: 450px;
+            background-color: #ccc;
+            position: absolute;
+            right: 0;
+        }
+        .bar {
+            width: 24px;
+            cursor: pointer;
+            background-color: red;
+            border-radius: 11px;
+            position: absolute;
+            top: 0;
+        }
+    </style>
+
+    <!--要使用jquery框架我们需要先引包。-->
+    <script src="jQuery1.11.1.js"></script>
+    <script>
+        window.onload = function () {
+            //需求：移动bar滚动条(拖拽案例)，让content内容等比例移动(放大镜)。
+
+            //步骤：
+            //0.老三步。
+            //1.根据比例算出bar的高度，并为其赋值。
+            //2.根据鼠标移动的坐标跳转bar(拖拽案例)。
+            //3.让content内容等比例移动(放大镜)。
+
+
+            //0.老三步。
+            var box = document.getElementById("box");
+            var content = box.firstElementChild || box.firstChild;
+            var scrollBox = box.lastElementChild || box.lastChild;
+            var bar = box.children[1].children[0];
+
+            //当内容的高小于box的高的时候，不能产生小bar和下面的代码。
+            if(box.clientHeight >= content.offsetHeight){
+                return;
+            }
+
+            //1.根据比例算出bar的高度，并为其赋值。
+            //box.height/content.height  =  bar.height/scroll.height;
+            var barHeight = box.clientHeight/content.offsetHeight*scrollBox.offsetHeight;
+            //为bar的高度赋值。
+            bar.style.height = barHeight + "px";
+
+            //2.根据鼠标移动的坐标跳转bar(拖拽案例)。
+            //为bar绑定onmousedown事件后，在为document绑定onmousemove事件。
+            bar.onmousedown = function (e) {
+                //获取鼠标在盒子bar中的坐标
+                //新五步
+                e = e || window.event;
+                var pagey = e.pageY || e.clientY + scroll().top;
+                var bary = bar.offsetTop;
+                //要差值。
+                var y = pagey - bary;
+
+                document.onmousemove = function (event) {
+                    //新五步
+                    event = event || window.event;
+                    var mousey = event.pageY || event.clientY + scroll().top;
+                    //为bar赋值，让bar和鼠标联动
+                    //为小bar赋值的时候要减去鼠标在盒子中的坐标。
+                    mousey = mousey - y;
+                    //mousey的值要收到限制，最小值为0，最大值为scroll.Height-bar.height;
+                    if(mousey<0){
+                        mousey = 0;
+                    }
+                    if(mousey>scrollBox.offsetHeight-bar.offsetHeight){
+                        mousey = scrollBox.offsetHeight-bar.offsetHeight;
+                    }
+
+                    bar.style.top = mousey + "px";
+
+                    //3.让content内容等比例移动(放大镜)。
+                    //比例计算后，bar移动多少，content等比例移动。
+                    //(content.height-box.height)/(scroll.height-bar.height) = content的实际走的距离/bar走过的实际距离
+                    var contentTop = (content.offsetHeight-box.clientHeight)/(scrollBox.offsetHeight-bar.offsetHeight)*mousey;
+                    //为content赋值，让content等比例移动。
+                    content.style.top = -contentTop + "px";
+
+                    window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
+                }
+            }
+
+            //鼠标抬起，移除移动事件。
+            document.onmouseup = function () {
+                //事件解绑
+                document.onmousemove = null;
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <div class="box" id="box">
+        <div class="content">
+            杀尽江南百万兵，腰中宝刀血尤腥。<br>
+            老僧不识英雄汉，只管潇潇问姓名。<br>
+            杀尽江南百万兵，腰中宝刀血尤腥。<br>
+            老僧不识英雄汉，只管潇潇问姓名。<br>
+            杀尽江南百万兵，腰中宝刀血尤腥。<br>
+            老僧不识英雄汉，只管潇潇问姓名。<br>
+            杀尽江南百万兵，腰中宝刀血尤腥。<br>
+            老僧不识英雄汉，只管潇潇问姓名。<br>
+            杀尽江南百万兵，腰中宝刀血尤腥。<br>
+            老僧不识英雄汉，只管潇潇问姓名。<br>
+            杀尽江南百万兵，腰中宝刀血尤腥。<br>
+            老僧不识英雄汉，只管潇潇问姓名。<br>
+            杀尽江南百万兵，腰中宝刀血尤腥。<br>
+            老僧不识英雄汉，只管潇潇问姓名。<br>
+            杀尽江南百万兵，腰中宝刀血尤腥。<br>
+            老僧不识英雄汉，只管潇潇问姓名。<br>
+            杀尽江南百万兵，腰中宝刀血尤腥。<br>
+            老僧不识英雄汉，只管潇潇问姓名。<br>
+            杀尽江南百万兵，腰中宝刀血尤腥。<br>
+            老僧不识英雄汉，只管潇潇问姓名。<br>
+            杀尽江南百万兵，腰中宝刀血尤腥。<br>
+            老僧不识英雄汉，只管潇潇问姓名。<br>
+            杀尽江南百万兵，腰中宝刀血尤腥。<br>
+            老僧不识英雄汉，只管潇潇问姓名。<br>
+            杀尽江南百万兵，腰中宝刀血尤腥。<br>
+            老僧不识英雄汉，只管潇潇问姓名。<br>
+            杀尽江南百万兵，腰中宝刀血尤腥。<br>
+            老僧不识英雄汉，只管潇潇问姓名。<br>
+            杀尽江南百万兵，腰中宝刀血尤腥。<br>
+            老僧不识英雄汉，只管潇潇问姓名。<br>
+            杀尽江南百万兵，腰中宝刀血尤腥。<br>
+            老僧不识英雄汉，只管潇潇问姓名。<br>
+            杀尽江南百万兵，腰中宝刀血尤腥。<br>
+            老僧不识英雄汉，只管潇潇问姓名。<br>
+            杀尽江南百万兵，腰中宝刀血尤腥。<br>
+            老僧不识英雄汉，只管潇潇问姓名。<br>
+            杀尽江南百万兵，腰中宝刀血尤腥。<br>
+            老僧不识英雄汉，只管潇潇问姓名。<br>
+            杀尽江南百万兵，腰中宝刀血尤腥。<br>
+            老僧不识英雄汉，只管潇潇问姓名。<br>
+            杀尽江南百万兵，腰中宝刀血尤腥。<br>
+            老僧不识英雄汉，只管潇潇问姓名。<br>
+            杀尽江南百万兵，腰中宝刀血尤腥。<br>
+            老僧不识英雄汉，只管潇潇问姓名。<br>
+            杀尽江南百万兵，腰中宝刀血尤腥。<br>
+            老僧不识英雄汉，只管潇潇问姓名。<br>
+            杀尽江南百万兵，腰中宝刀血尤腥。<br>
+            老僧不识英雄汉，只管潇潇问姓名。<br>
+            杀尽江南百万兵，腰中宝刀血尤腥。<br>
+            老僧不识英雄汉，只管潇潇问姓名。<br>
+            杀尽江南百万兵，腰中宝刀血尤腥。<br>
+            老僧不识英雄汉，只管潇潇问姓名。<br>
+            杀尽江南百万兵，腰中宝刀血尤腥。<br>
+            老僧不识英雄汉，只管潇潇问姓名。<br>
+            杀尽江南百万兵，腰中宝刀血尤腥。<br>
+            老僧不识英雄汉，只管潇潇问姓名。<br>
+            杀尽江南百万兵，腰中宝刀血尤腥。<br>
+            老僧不识英雄汉，只管潇潇问姓名。<br>
+            杀尽江南百万兵，腰中宝刀血尤腥。<br>
+            老僧不识英雄汉，只管潇潇问姓名。<br>
+            杀尽江南百万兵，腰中宝刀血尤腥。<br>
+            老僧不识英雄汉，只管潇潇问姓名。<br>
+            杀尽江南百万兵，腰中宝刀血尤腥。<br>
+            老僧不识英雄汉，只管潇潇问姓名。<br>
+            -----------未完待续--------
+        </div>
+        <div class="scroll">
+            <div class="bar"></div>
+        </div>
+    </div>
+
+</body>
+</html>
