@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/HTML5与CSS3/font-awesome.css">
+    <link rel="stylesheet" href="../css/HTML5与CSS3/css.css">
+</head>
+<body>
+<h3 class="playerTitle">视频播放器</h3>
+<div class="player">
+    <video src="../img/HTML5/chrome.mp4"></video>
+    <div class="controls">
+        <a href="javascript:;" class="switch fa fa-play"></a>
+        <a href="javascript:;" class="expand fa fa-expand"></a>
+        <div class="progress">
+            <div class="bar"></div>
+            <div class="loaded"></div>
+            <div class="elapse"></div>
+        </div>
+        <div class="time">
+            <span class="currentTime">00:00:00</span>
+            \
+            <span class="totalTime">00:00:00</span>
+        </div>
+    </div>
+</div>
+<script src="../JS/jquery-1.12.4.js"></script>
+<script>
+    $(function(){
+        var video=$("video")[0];
+        /*实现播放与暂停*/
+        $(".switch").on("click",function(){
+            if(video.paused){ //现在是暂停状态
+                /*播放*/
+                video.play();
+            }
+            else{
+                video.pause();
+            }
+            /*切换样式*/
+            $(this).toggleClass("fa-play fa-pause");
+        });
+        /*实现全屏*/
+        $(".expand").on("click",function(){
+            if(video.mozRequestFullScreen){
+                video.mozRequestFullScreen();
+            }
+            else if(video.requestFullScreen){
+                video.requestFullScreen();
+            }
+            else if(video.webkitRequestFullScreen){
+                video.webkitRequestFullScreen();
+            }
+            else  if(video.msRequestFullscreen){
+                video.msRequestFullscreen();
+            }
+        });
+
+        /*通过时间获取时分秒*/
+        var getResult=function(time){
+            /*获取时分秒*/
+            /** 3700s   Math.floor(3700/(60*60))
+             * 3700%3600>>100/60
+             * 3700%60*!/*/
+            var hour=Math.floor(time/3600);
+            hour=hour<10?"0"+hour:hour;
+            var minute=Math.floor(time%3600/60);
+            minute=minute<10?"0"+minute:minute;
+            var second=Math.floor(time%60);
+            second=second<10?"0"+second:second;
+            var result=hour+":"+minute+":"+second;
+            return result;
+        }
+
+        /*当视频可以播放或者下载（加载）完毕的时候，就会触发oncanplay事件*/
+        video.oncanplay=function(e){
+            setTimeout(function(){
+                /*1.让视频文件显示*/
+                video.style.display="block";
+                /*2.获取当前视频的总时长  duration:36.339229   以秒做单位，有小数*/
+                var total= video.duration;
+                /*3.获取时分秒*/
+                var result=getResult(total);
+                /*展示*/
+                document.querySelector(".totalTime").innerHTML=result;
+            },2000);
+        }
+
+        /*当视频播放的时候就会持续的触发ontimeupdate事件
+         * 本质上播放的持续播放currentTime在变化，意味着只要能够修改到currentTime的值，就会触发ontimeupdate事件*/
+        video.ontimeupdate=function(e){
+            /*1。获取当前视频播放到的时间*/
+            var current=video.currentTime;
+            /*2.获取时分秒*/
+            var result=getResult(current);
+            /*3.赋值*/
+            document.querySelector(".currentTime").innerHTML=result;
+            /*4.计算当前播放时间与总时长的比例*/
+            var percent=current/video.duration*100+"%";
+            $(".elapse").css("width",percent);
+        }
+
+        /*实现跳播功能*/
+        $(".bar").on("click",function(e){
+            /*1.获取当前鼠标点击的位置相对于父容器的偏移值*/
+            var offset= e.offsetX;
+            /*2.计算当前鼠标单击的位置相对于bar元素总长度的比例*/
+            var percent=offset/$(this).width();
+            /*3.获取当前需要跳转到的时间点*/
+            var current=percent*video.duration;
+            /*4.重置当前视频播放的时间点*/
+            video.currentTime=current;
+            $(".switch").toggleClass("fa-play fa-pause");
+            video.play();
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+<form action="">
+    用户名：<input type="text" id="userName"> <br>
+    <!--sarch在移动端添加一个删除的功能-->
+    商品名称：<input type="search" id="search"><br>
+    <!--email:验证输入电子邮箱，但是不代表一定要输入-->
+    电子邮箱：<input type="email"> <br>
+    <!--主要作用就是用来在移动端叫出数字键盘-->
+    电话：<input type="tel" pattern="^1[357]\d{9}$" id="tel"> <br>
+    <!--只能输入网址，有验证，但是不要求一定输入-->
+    网址：<input type="url"> <br>
+    <!--只能输入数字-->
+    <!--value="60":默认值 step="2"：步长值-->
+    成绩：<input type="number" min="0" max="100" value="60" step="2"> <br>
+    范围：<input type="range" min="0" max="100" value="90" id="score"> <br>
+    颜色：<input type="color" value="#ff0000"> <br>
+    时间：<input type="time"> <br>
+    日期：<input type="date"> <br>
+    <!--datetime：现在几乎所有主流浏览器都不支持--可用于屏幕阅读器-->
+    日期时间 ：<input type="datetime-local"> <br>
+    月份：<input type="month"> <br>
+    周：<input type="week"> <br>
+    <input type="submit">
+</form>
+<script>
+    var score=document.getElementById("score");
+    score.oninput=function(){
+        console.log(this.value);
+    }
+
+    var userName=document.getElementById("userName");
+    /*只要有键盘的弹起捕获就会触发*/
+    userName.onkeyup=function(){
+        console.log(this.value);
+    }
+
+    /*只要有内容的改变就会触发*/
+    var search=document.getElementById("search");
+    search.oninput=function(){
+        console.log(this.value);
+    }
+
+    var tel=document.getElementById("tel");
+    tel.oninvalid=function(e){
+        /*修改设置自定义提示文本*/
+        /*不是函数就是属性*/
+        tel.setCustomValidity("请输入11位的手机号码");
+//       tel.setCustomValidity();
+    }
+</script>
+</body>
+</html>
+</body>
+</html>

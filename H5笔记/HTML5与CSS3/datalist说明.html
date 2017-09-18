@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!--一定要让文本框与datalist建立关联  通过list可以建立关联：指定datalist的 id号-->
+省份：<input type="text" list="pro">
+<datalist id="pro">
+    <option value="11广东省">广东省</option>
+    <option value="12广西省">广西省</option>
+    <option value="22湖南省">湖南省</option>
+</datalist>
+
+网站：<input type="text" list="urls">
+<!--如果是网站，则必须添加http://   https://-->
+<datalist id="urls">
+    <option value="http://www.baidu.com">百度</option>
+    <option value="http://www.sohu.com">搜狐</option>
+    <option value="http://www.163.com">网易</option>
+</datalist>
+</body>
+</html>

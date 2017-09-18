@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .first{
+            width: 200px;
+            height: 200px;
+            border: 1px solid red;
+            float: left;
+        }
+        .first p{
+            width: 80%;
+            background-color: #ccc;
+        }
+        .second{
+            width: 200px;
+            height: 200px;
+            border: 1px solid blue;
+            margin-left:200px;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+<div class="first">
+注释<!--添加可拖拽属性-->
+    <p draggable="true" id="p1">把我拖过去</p>
+    <p draggable="true" id="p2">也把我拖过去</p>
+</div>
+<div class="second">
+
+</div>
+
+<script>
+注释/*针对被拖拽元素*/
+    var p1=document.querySelector("#p1");
+    var second=document.querySelector(".second");
+
+注释/*添加拖拽事件*/
+注释/*开始拖拽的瞬间触发*/
+    p1.addEventListener("dragstart",function(){
+        console.log("dragstart");
+    });
+注释/*拖拽过程中持续触发，一直触发个事件，直到放开鼠标*/
+    p1.addEventListener("drag",function(){
+        //console.log("p1:drag");
+    });
+注释/*拖拽结束时触发*/
+    p1.addEventListener("dragend",function(){
+        console.log("dragend");
+    });
+注释/*当鼠标离开被拖拽元素时触发*/
+    p1.addEventListener("dragleave",function(){
+        console.log("dragleave");
+    });
+
+注释/*针对目标元素*/
+注释/*当被拖拽元素进行到目标元素时触发--以鼠标的位置做为标准*/
+    second.addEventListener("dragenter",function(){
+        console.log("dragenter");
+    })
+注释/*当进行入目标元素上方没有离开时持续触发*/
+    second.addEventListener("dragover",function(e){
+        //console.log("first:dragover");
+注释    /*阻止浏览器的默认行为，（一个元素默认是不能拖拽到另个元素里面的，所以要改变这个行为）*/
+        e.preventDefault();
+    })
+注释/*当被拖拽元素离开目标元素时触发，首先要元素进入到过目标元素*/
+    second.addEventListener("dragleave",function(){
+        console.log("dragleave");
+    })
+注释/*当在目标元素上方松开鼠标时触发*/
+    second.addEventListener("drop",function(){
+        console.log("drop");
+注释    /*将当前的p1添加到当前目标元素中*/
+        second.appendChild(p1);
+    })
+</script>
+</body>
+</html>

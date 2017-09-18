@@ -1,0 +1,98 @@
+.banxin {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.gonggong {
+  font: 500 30px "microsoft yahei";
+  padding-top: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #c2c2c2;
+  width: 100%;
+  color: #000;
+}
+.gonggong a {
+  font-size: 12px;
+  padding-left: 20px;
+  padding-top: 25px;
+}
+
+.gonggong2 {
+  width: 100%;
+  background-color: #eeeeee;
+  padding: 10px 10px 10px 20px;
+  margin-top: 20px;
+  box-sizing: border-box;
+  border: 1px solid #d1d1d1;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.titleName {
+  padding: 100px;
+}
+.titleName h1 {
+  line-height: 50px;
+  text-align: center;
+  font-size: 30px;
+  margin: 0 auto 100px;
+  width: 200px;
+  border: 1px solid #999;
+  border-radius: 10px;
+  background-color: #e9ebe8;
+}
+
+main {
+  position: relative;
+}
+
+.nameList {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.nameList ul li {
+  width: 100%;
+  height: 25px;
+  background-color: #e9ebe8;
+  margin-top: 2px;
+  padding: 0 10px;
+  box-sizing: border-box;
+  font-size: 14px;
+  line-height: 25px;
+  border-radius: 5px;
+  color: #666666;
+  cursor: pointer;
+}
+.nameList ul li:hover {
+  background-color: red;
+  color: #fff;
+}
+
+.neirong {
+  width: 75%;
+  font-size: 16px;
+  line-height: 27px;
+  color: #323232;
+}
+.neirong .bash table, .neirong .bash th, .neirong .bash td {
+  border: 1px solid #8f908d;
+}
+.neirong .bash th, .neirong .bash td {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.neirong .vi table, .neirong .vi th, .neirong .vi td {
+  border: 1px solid #8f908d;
+}
+.neirong .vi th, .neirong .vi td {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.neirong .gitmn table, .neirong .gitmn th, .neirong .gitmn td {
+  border: 1px solid #8f908d;
+}
+.neirong .gitmn th, .neirong .gitmn td {
+  padding-left: 15px;
+  padding-right: 15px;
+}

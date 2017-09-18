@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .first{
+            width: 200px;
+            height: 200px;
+            border: 10px solid red;
+            float: left;
+        }
+        .first p{
+            width: 80%;
+            background-color: #ccc;
+            z-index: 20;
+        }
+        .second{
+            width: 300px;
+            height: 300px;
+            border: 1px solid blue;
+            margin-left:200px;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+<div class="first" draggable="true">
+注释<!--添加可拖拽属性-->
+    <p draggable="true" id="p1">把我拖过去</p>
+    <p draggable="true" id="p2">也把我拖过去</p>
+</div>
+<div class="second">
+
+</div>
+
+<script>
+注释/*针对被拖拽元素*/
+    var p1=document.querySelector("#p1");
+    var second=document.querySelector(".second");
+    var obj=null;
+注释/*添加拖拽事件*/
+注释/*开始拖拽的瞬间触发*/
+注释// 通过事件捕获来实现，e.target 目标元素，
+    document.addEventListener("dragstart",function(e){
+        console.log(e.target);
+        obj=e.target;
+    });
+注释/*针对目标元素*/
+注释/*当进行入目标元素上方没有离开时持续触发*/
+    document.addEventListener("dragover",function(e){
+注释    /*阻止浏览器的默认行为*/
+        e.preventDefault();
+    })
+注释/*当在目标元素上方松开鼠标时触发*/
+    document.addEventListener("drop",function(e){
+        console.log(e.target);
+注释    /*将当前的p1添加到当前目标元素中*/
+        e.target.appendChild(obj);
+    })
+</script>
+</body>
+</html>
