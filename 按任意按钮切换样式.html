@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/base.css">
+
+    <link rel="stylesheet" href="./css/exchange.css">
+</head>
+
+<body>
+    <div class="background">
+        <div class="box">
+            <div id="one" class="unclick" name='0'>
+                <a href="#">
+                    <img src="./image/学习.png" alt="">
+                </a>
+            </div>
+            <div id="two" class="unclick" name='1'>
+                <a href="#">
+                    <img src="./image/挑战.png" alt="">
+                </a>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="./js/jquery.min.1.8.3.js"></script>
+<script>
+    // $(function () {
+    //     var bool = 0;
+    //     $(document).keyup(function () {
+    //         if (bool) {
+    //             $("#one").removeClass("unclick").addClass("click");
+    //             $("#two").removeClass("click").addClass("unclick");
+    //             bool = !bool
+    //         } else {
+    //             $("#one").removeClass("click").addClass("unclick");
+    //             $("#two").removeClass("unclick").addClass("click");
+    //             bool = !bool
+    //         }
+    //     });
+    //     console.log($(''))
+    // })
+
+    $(function () {
+        $('.box div').mouseenter(function () {
+            $(this).removeClass("unclick").addClass("click");
+        })
+        $('.box div').mouseleave(function () {
+            $(this).removeClass("click").addClass("unclick");
+        })
+    })
+</script>
