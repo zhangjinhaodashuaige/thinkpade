@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="input">
+</body>
+
+</html>
+<script src="./js/jquery.min.1.8.3.js"></script>
+<script>
+    var array = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+        'u', 'v', 'w', 's', 'y', 'z'
+    ];
+
+
+    array.sort(function (a, b) { //function(a, b） 是一个排序指针方法
+
+        return 0.5 - Math.random() //  a -b 从小到大， b - a 从大到小 ，Math.random()  产生一个随机数，大于0.5 数组从小到大，小于0.5，数组从大到小排。
+
+    });
+    console.log(array)
+
+    var box = [];
+    for (let i = 0; i < 5; i++) {
+        box.push(array.shift())
+    }
+    console.log(box)
+    $('#input').keyup(function () {
+        if ($.inArray($(this).val(), box) != -1) {
+            box.splice(box.indexOf($(this).val()), 1)
+            box.push(array.shift())
+            $(this).val('');
+        }
+        console.log(array)
+        console.log(box)
+        if (!box[0]) {
+            console.log('过关成功')
+        }
+    })
+</script>
